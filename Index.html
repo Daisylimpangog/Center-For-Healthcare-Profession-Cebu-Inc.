@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Center for Healthcare Profession Cebu Inc.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #218009;
+      --primary-light: #e3eafc;
+      --accent: #42a5f5;
+      --border: #bcd7f5;
+      --background: #e8f5e9;
+      --background-gradient: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      --text: #222;
+      --header: #fff;
+      --footer-bg: #1b5e20;
+      --footer-text: #e8f5e9;
+      --footer-accent: #a5d6a7;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--background-gradient);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    .form-container {
+      background: var(--header);
+      max-width: 900px;
+      margin: 30px auto 40px auto;
+      padding: 32px 40px 24px 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(25, 118, 210, 0.13);
+      border: 2px solid var(--primary);
+      transition: box-shadow 0.2s;
+    }
+    .form-container:hover {
+      box-shadow: 0 10px 40px rgba(25, 118, 210, 0.18);
+    }
+    .school-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .school-header img {
+      width: 70px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: var(--header);
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+    }
+    .school-header h1 {
+      margin: 0;
+      font-size: 2.1em;
+      color: #1b5e20;
+      letter-spacing: 2px;
+      font-weight: 800;
+      text-shadow: 0 2px 8px rgba(56, 142, 60, 0.08);
+    }
+    .school-header h2 {
+      margin: 0;
+      font-size: 1.1em;
+      color: #388e3c;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    .school-header p {
+      margin: 0;
+      font-size: 1em;
+      color: #555;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    .school-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .feature {
+      flex: 1;
+      min-width: 180px;
+      background: #f1f8e9;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 4px 16px rgba(56, 142, 60, 0.10);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid #a5d6a7;
+    }
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(56, 142, 60, 0.13);
+    }
+    .feature img {
+      width: 61px;
+      height: 50px;
+      margin-bottom: 12px;
+    }
+    .feature b {
+      display: block;
+      font-size: 1.1em;
+      color: #388e3c;
+      margin-bottom: 6px;
+    }
+    .feature span {
+      font-size: 0.9em;
+      color: #555;
+    }
+    h2.section-title {
+      margin-top: 28px;
+      margin-bottom: 10px;
+      font-size: 1.15em;
+      color: #388e3c;
+      border-bottom: 2px solid #a5d6a7;
+      padding-bottom: 4px;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #e8f5e9 60%, transparent 100%);
+      border-radius: 4px;
+    }
+    label {
+      font-size: 1em;
+      margin-bottom: 2px;
+      color: var(--text);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .col {
+      flex: 1;
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+    }
+    input[type="text"], input[type="number"], input[type="date"], input[type="email"], select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 6px;
+      font-size: 1em;
+      background: #f1f8e9;
+      margin-bottom: 6px;
+      box-sizing: border-box;
+      transition: border 0.2s, background 0.2s;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, input[type="email"]:focus, select:focus {
+      border: 1.5px solid #388e3c;
+      outline: none;
+      background: #e8f5e9;
+    }
+    input[type="checkbox"], input[type="radio"] {
+      accent-color: #388e3c;
+      margin-right: 6px;
+      transform: scale(1.15);
+    }
+    .section {
+      margin-bottom: 18px;
+    }
+    .checkbox-group, .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 8px;
+    }
+    .signature-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+      gap: 24px;
+    }
+    .signature-box {
+      width: 45%;
+      border-top: 2px solid #388e3c;
+      text-align: center;
+      padding-top: 10px;
+      font-size: 1em;
+      color: #444;
+      font-style: italic;
+      background: #e8f5e9;
+      border-radius: 0 0 8px 8px;
+      min-height: 60px;
+    }
+    .submit-btn {
+      margin-top: 28px;
+      background: linear-gradient(90deg, #388e3c 60%, #66bb6a 100%);
+      color: #fff;
+      border: none;
+      padding: 15px 0;
+      font-size: 1.15em;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 12px rgba(56,142,60,0.13);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(90deg, #2e7d32 60%, #388e3c 100%);
+      box-shadow: 0 4px 18px rgba(56,142,60,0.18);
+    }
+    .instructions {
+      background: #e8f5e9;
+      border-left: 5px solid #388e3c;
+      padding: 12px 20px;
+      margin-bottom: 18px;
+      font-size: 1.07em;
+      color: var(--text);
+      border-radius: 6px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .school-highlights {
+      margin-bottom: 24px;
+    }
+    .highlights-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+    }
+    .highlight {
+      background: #fff;
+      border: 1.5px solid #a5d6a7;
+      border-radius: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 18px;
+      flex: 1 1 180px;
+      min-width: 180px;
+      max-width: 48%;
+      box-shadow: 0 2px 8px rgba(56, 142, 60, 0.06);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .highlight:hover {
+      box-shadow: 0 6px 24px rgba(56, 142, 60, 0.13);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .highlight img {
+      width: 38px;
+      height: 38px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .highlight b {
+      color: #388e3c;
+      font-size: 1.04em;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .highlight span {
+      color: #333;
+      font-size: 0.98em;
+      display: block;
+    }
+    @media (max-width: 1000px) {
+      .form-container { padding: 18px 2vw; }
+    }
+    @media (max-width: 700px) {
+      .form-container { padding: 10px 1vw; }
+      .row { flex-direction: column; gap: 0; }
+      .signature-row { flex-direction: column; gap: 18px; }
+      .signature-box { width: 100%; }
+      .school-header img { width: 54px; }
+      h2.section-title { font-size: 1em; }
+      .highlights-list {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .highlight {
+        max-width: 100%;
+        min-width: 0;
+      }
+      .school-features {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .feature {
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+    @media (max-width: 480px) {
+      .form-container { padding: 2vw 1vw; }
+      .school-header h1 { font-size: 1.2em; }
+      .school-header h2, .school-header p { font-size: 0.9em; }
+      label { font-size: 0.98em; }
+      .submit-btn { font-size: 1em; }
+    }
+
+    .fb-modal {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(56, 142, 60, 0.18);
+      align-items: center;
+      justify-content: center;
+    }
+    .fb-modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 24px 18px 24px;
+      max-width: 350px;
+      width: 92vw;
+      margin: auto;
+      box-shadow: 0 8px 32px rgba(56, 142, 60, 0.18);
+      position: relative;
+      text-align: center;
+      animation: fbmodalpop 0.2s;
+    }
+    @keyframes fbmodalpop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .fb-modal-close {
+      position: absolute;
+      right: 18px;
+      top: 10px;
+      font-size: 1.5em;
+      color: #388e3c;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .fb-modal-close:hover { color: #d32f2f; }
+    .fb-modal-content h3 {
+      margin: 0 0 18px 0;
+      color: #388e3c;
+      font-size: 1.13em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .fb-page-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .fb-page-list li {
+      margin-bottom: 10px;
+      padding-bottom: 2px;
+    }
+    .fb-page-list button {
+      width: 100%;
+      background: #388e3c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 0;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s;
+      margin-bottom: 2px;
+    }
+    .fb-page-list button:hover {
+      background: #2e7d32;
+    }
+    .fb-page-desc {
+      font-size: 0.93em;
+      color: #388e3c;
+      margin-top: 2px;
+      margin-bottom: 7px;
+      text-align: left;
+      padding-left: 2px;
+    }
+
+    .bubble-chat {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #388e3c;
+      color: #fff;
+      border-radius: 50px;
+      box-shadow: 0 4px 18px rgba(56, 142, 60, 0.18);
+      display: flex;
+      align-items: center;
+      padding: 10px 18px 10px 10px;
+      cursor: pointer;
+      z-index: 9999;
+      transition: background 0.2s, box-shadow 0.2s;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .bubble-chat:hover {
+      background: #2e7d32;
+      box-shadow: 0 8px 32px rgba(56, 142, 60, 0.22);
+    }
+    .bubble-chat img {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      border-radius: 50%;
+      background: #fff;
+      padding: 3px;
+      box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+    }
+    .bubble-text {
+      display: inline-block;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .bubble-chat {
+        right: 12px;
+        bottom: 12px;
+        padding: 8px 12px 8px 8px;
+        font-size: 0.95em;
+      }
+      .bubble-chat img {
+        width: 26px;
+        height: 26px;
+        margin-right: 7px;
+      }
+    }
+    @media (max-width: 480px) {
+      .bubble-chat {
+        right: 6px;
+        bottom: 6px;
+        padding: 7px 10px 7px 7px;
+        font-size: 0.92em;
+      }
+      .bubble-chat img {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+      }
+    }
+
+    /* Footer styles */
+    .footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 32px 0 18px 0;
+      text-align: center;
+      font-size: 1em;
+      margin-top: 40px;
+      border-top: 4px solid #388e3c;
+      position: relative;
+      z-index: 2;
+    }
+    .footer .footer-logo {
+      width: 54px;
+      border-radius: 50%;
+      border: 2px solid var(--footer-accent);
+      margin-bottom: 10px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(56, 142, 60, 0.10);
+    }
+    .footer .footer-title {
+      font-size: 1.25em;
+      font-weight: 700;
+      color: var(--footer-accent);
+      margin-bottom: 2px;
+      letter-spacing: 1px;
+    }
+    .footer .footer-links {
+      margin: 12px 0 8px 0;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .footer .footer-links a {
+      color: var(--footer-accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      font-size: 1em;
+    }
+    .footer .footer-links a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .footer .footer-contact {
+      margin: 8px 0 0 0;
+      font-size: 0.98em;
+      color: #c8e6c9;
+    }
+    .footer .footer-social {
+      margin: 14px 0 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .footer .footer-social a {
+      display: inline-block;
+      background: #fff;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      color: #388e3c;
+      font-size: 1.3em;
+      transition: background 0.2s, color 0.2s;
+      border: 1.5px solid #a5d6a7;
+    }
+    .footer .footer-social a:hover {
+      background: #388e3c;
+      color: #fff;
+    }
+    .footer .footer-copy {
+      margin-top: 18px;
+      font-size: 0.93em;
+      color: #a5d6a7;
+      letter-spacing: 0.5px;
+    }
+
+    /* Multi-step form styles */
+    .form-step {
+      display: none;
+    }
+    .form-step.active {
+      display: block;
+    }
+    .step-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .step-btn {
+      background: #388e3c;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(56,142,60,0.13);
+      transition: background 0.2s;
+    }
+    .step-btn:disabled {
+      background: #a5d6a7;
+      cursor: not-allowed;
+    }
+    .step-btn:hover:not(:disabled) {
+      background: #2e7d32;
+    }
+    .download-btn {
+      background: linear-gradient(90deg, #388e3c 60%, #66bb6a 100%);
+      color: #fff;
+      border: none;
+      padding: 13px 0;
+      font-size: 1.13em;
+      border-radius: 7px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 12px rgba(56,142,60,0.13);
+      transition: background 0.2s;
+      margin-top: 24px;
+    }
+    .download-btn:hover {
+      background: linear-gradient(90deg, #2e7d32 60%, #388e3c 100%);
+    }
+    .tesda-form-img {
+      display: block;
+      margin: 0 auto 18px auto;
+      max-width: 100%;
+      border: 2px solid #388e3c;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #a5d6a7;
+    }
+    .tesda-form-fields {
+      background: #f1f8e9;
+      border-radius: 10px;
+      padding: 18px 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px #a5d6a7;
+    }
+    .tesda-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .tesda-col {
+      flex: 1 1 180px;
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+    }
+    .tesda-label {
+      font-size: 0.98em;
+      color: #222;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    @media (max-width: 700px) {
+      .tesda-row { flex-direction: column; gap: 0; }
+      .tesda-col { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="school-header">
+      <!-- You can replace the src with your school logo -->
+      <img src="/LOGO 1.jpg" alt="School Logo">
+      <h1>CHP CEBU</h1>
+      <h2>TESDA Accredited Training & Assessment Center</h2>
+      <p>Online Enrollment Form</p>
+    </div>
+    <div class="school-features">
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Certified Trainers">
+        <div>
+          <b>Certified Trainers</b>
+          <span>Learn from TESDA-accredited and industry-experienced instructors.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Modern Facilities">
+        <div>
+          <b>Modern Facilities</b>
+          <span>State-of-the-art classrooms and simulation labs for hands-on learning.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="/tesda.jpg" alt="TESDA Certification">
+        <div>
+          <b>TESDA Accredited Certification</b>
+          <span>Get nationally recognized certificates upon course completion.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Career Assistance">
+        <div>
+          <b>Career Assistance</b>
+          <span>We help graduates with job placement and career guidance.</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-bottom:24px;">
+  <video width="900" controls>
+    <source src="/Center For Healthcare Professions Cebu, Inc..mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+    <div class="school-highlights">
+      <h2 class="section-title" style="margin-top:0;">Why Choose CHP Cebu?</h2>
+      <div class="highlights-list">
+        <div class="highlight">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Scholarships">
+          <div>
+            <b>Scholarship Opportunities(Not yet Available)</b>
+            <span>Avail government and private scholarships for qualified students.</span>
+          </div>
+        </div>
+        <div class="highlight">
+          <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Flexible Schedules">
+          <div>
+            <b>Flexible Schedules</b>
+            <span>Weekend and evening classes available for working students.</span>
+          </div>
+        </div>
+        <div class="highlight">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135773.png" alt="Alumni Network">
+          <div>
+            <b>Active Alumni Network</b>
+            <span>Connect with successful CHP Cebu graduates in various industries.</span>
+          </div>
+        </div>
+        <div class="highlight">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Community Outreach">
+          <div>
+            <b>Community Outreach</b>
+            <span>Participate in outreach programs and real-world training projects.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="instructions">
+      <b>INSTRUCTION:</b> Please do NOT leave blanks. Write N/A when applicable.
+    </div>
+    <form id="multiStepForm" autocomplete="off">
+      <!-- STEP 1: CHP Enrollment Form -->
+      <div id="step1" class="form-step active">
+        <h2 class="section-title">A. Personal Record</h2>
+        <div class="row">
+          <div class="col">
+            <label>Family Name</label>
+            <input type="text" name="Family Name" required>
+          </div>
+          <div class="col">
+            <label>First Name</label>
+            <input type="text" name="First Name" required>
+          </div>
+          <div class="col">
+            <label>Middle Name</label>
+            <input type="text" name="Middle Name">
+          </div>
+          <div class="col">
+            <label>Nickname</label>
+            <input type="text" name="Nickname">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Age</label>
+            <input type="number" name="Age" min="1" required>
+          </div>
+          <div class="col">
+            <label>Date of Birth</label>
+            <input type="date" name="Date of Birth" required>
+          </div>
+          <div class="col">
+            <label>Place of Birth</label>
+            <input type="text" name="Place of Birth">
+          </div>
+          <div class="col">
+            <label>Sex</label>
+            <div class="radio-group">
+              <label><input type="radio" name="Sex" value="Male" required> Male</label>
+              <label><input type="radio" name="Sex" value="Female"> Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Marital Status</label>
+            <select name="Marital Status" required>
+              <option value="">Select</option>
+              <option>Single</option>
+              <option>Married</option>
+              <option>Widowed</option>
+              <option>Separated</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Citizenship</label>
+            <input type="text" name="Citizenship">
+          </div>
+          <div class="col">
+            <label>Religion</label>
+            <input type="text" name="Religion">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Present Address</label>
+            <input type="text" name="Present Address">
+          </div>
+          <div class="col">
+            <label>Provincial Address</label>
+            <input type="text" name="Provincial Address">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Contact Details/Mobile Number</label>
+            <input type="text" name="Contact Number">
+          </div>
+          <div class="col">
+            <label>Email Address</label>
+            <input type="email" name="Email Address" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Occupation</label>
+            <input type="text" name="Occupation">
+          </div>
+          <div class="col">
+            <label>Company</label>
+            <input type="text" name="Company">
+          </div>
+          <div class="col">
+            <label>Telephone</label>
+            <input type="text" name="Telephone">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Name of Spouse (if applicable)</label>
+            <input type="text" name="Spouse Name">
+          </div>
+          <div class="col">
+            <label>No. of Children</label>
+            <input type="number" name="No. of Children" min="0">
+          </div>
+        </div>
+
+        <h2 class="section-title">B. Academic Record</h2>
+        <div class="row">
+          <div class="col">
+            <label>Educational Attainment</label>
+            <select name="Educational Attainment">
+              <option value="">Select</option>
+              <option>College Graduate</option>
+              <option>Vocational Graduate</option>
+              <option>High School Graduate</option>
+              <option>NCII Certificate/s</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Course/Degree/NCII Certificate/s</label>
+            <input type="text" name="Course Degree NCII">
+          </div>
+          <div class="col">
+            <label>School Graduated</label>
+            <input type="text" name="School Graduated">
+          </div>
+          <div class="col">
+            <label>Year Graduated</label>
+            <input type="text" name="Year Graduated">
+          </div>
+        </div>
+
+        <h2 class="section-title">C. Additional Information</h2>
+        <div class="section">
+          <label>Which program do you wish to pursue?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="Program[]" value="Caregiving NCII"> Caregiving NCII</label>
+            <label><input type="checkbox" name="Program[]" value="Practical Nursing NCII"> Practical Nursing NCII</label>
+            <label><input type="checkbox" name="Program[]" value="Emergency Medical Services NCII"> Emergency Medical Services NCII</label>
+            <label><input type="checkbox" name="Program[]" value="Massage Therapy NCII"> Massage Therapy NCII</label>
+            <label><input type="checkbox" name="Program[]" value="Household Services NCII"> Household Services NCII</label>
+            <label><input type="checkbox" name="Program[]" value="Others"> Others</label>
+          </div>
+        </div>
+        <div class="section">
+          <label>How did you come to know about CHP Cebu?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="Referral[]" value="Friends/Relatives"> Friends/Relatives</label>
+            <label><input type="checkbox" name="Referral[]" value="Leaflets/Pamphlets"> Leaflets/Pamphlets</label>
+            <label><input type="checkbox" name="Referral[]" value="Facebook/Twitter/Instagram"> Facebook/Twitter/Instagram</label>
+            <label><input type="checkbox" name="Referral[]" value="Others"> Others</label>
+          </div>
+        </div>
+        <div class="section">
+          <label>How will you settle the fees/finances?</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="Finances[]" value="Self"> Self</label>
+            <label><input type="checkbox" name="Finances[]" value="Relatives"> Relatives</label>
+            <label><input type="checkbox" name="Finances[]" value="Employer"> Employer</label>
+          </div>
+        </div>
+        <div class="section">
+          <label>Terms of Payment:</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="Payment[]" value="Full Payment"> Full Payment</label>
+            <label><input type="checkbox" name="Payment[]" value="Installment"> Installment</label>
+            <label><input type="checkbox" name="Payment[]" value="Cash"> Cash</label>
+            <label><input type="checkbox" name="Payment[]" value="Check"> Check</label>
+          </div>
+        </div>
+        <div class="section" style="font-size:0.98em; color:#444; margin-top:18px;">
+          <b>STATEMENT:</b> I certify that the statements made are true to the best of my knowledge and belief. I understand that any misstatement may lead to disqualification or to dismissal.
+        </div>
+        <div class="signature-row">
+          <div class="signature-box">
+            RECEIVED BY:<br><br>
+            ___________________________<br>
+            (Signature)
+          </div>
+          <div class="signature-box">
+            Signature of Applicant<br><br>
+            ___________________________<br>
+            Date: _____________________
+          </div>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="step-btn" id="nextToStep2" title="Next">&#8594;</button>
+        </div>
+      </div>
+      <!-- STEP 2: TESDA Learner's Profile Form -->
+      <div id="step2" class="form-step" style="display:none;">
+        <h2 class="section-title">TESDA Learner's Profile Form</h2>
+        <img src="/121321.png" alt="TESDA Learners Profile Form" class="tesda-form-img">
+        <div class="tesda-form-fields">
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Unique Learner Identifier (ULI)</label>
+              <input type="text" name="TESDA ULI" maxlength="20" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Entry Date</label>
+              <input type="date" name="TESDA Entry Date" required>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Complete Mailing Address</label>
+              <input type="text" name="TESDA Mailing Address" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Email Address/Facebook Account</label>
+              <input type="text" name="TESDA Email" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Contact No.</label>
+              <input type="text" name="TESDA Contact" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Nationality</label>
+              <input type="text" name="TESDA Nationality" required>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Sex</label>
+              <select name="TESDA Sex" required>
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Civil Status</label>
+              <select name="TESDA Civil Status" required>
+                <option value="">Select</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Widowed</option>
+                <option>Separated</option>
+              </select>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Employment Status (before training)</label>
+              <select name="TESDA Employment Status" required>
+                <option value="">Select</option>
+                <option>Employed</option>
+                <option>Unemployed</option>
+              </select>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Month of Birth</label>
+              <input type="text" name="TESDA Month of Birth" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Day of Birth</label>
+              <input type="text" name="TESDA Day of Birth" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Year of Birth</label>
+              <input type="text" name="TESDA Year of Birth" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Age</label>
+              <input type="number" name="TESDA Age" min="1" required>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">City/Municipality</label>
+              <input type="text" name="TESDA City" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Province</label>
+              <input type="text" name="TESDA Province" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Region</label>
+              <input type="text" name="TESDA Region" required>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Highest Educational Attainment</label>
+              <select name="TESDA Highest Education" required>
+                <option value="">Select</option>
+                <option>No Grades Completed</option>
+                <option>Pre-School</option>
+                <option>Elementary Graduate</option>
+                <option>High School Graduate</option>
+                <option>College Graduate</option>
+                <option>Post Secondary</option>
+                <option>Junior High Graduate</option>
+                <option>Senior High Graduate</option>
+                <option>Others</option>
+              </select>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Parent/Guardian Name</label>
+              <input type="text" name="TESDA Parent Name" required>
+            </div>
+            <div class="tesda-col">
+              <label class="tesda-label">Parent/Guardian Address</label>
+              <input type="text" name="TESDA Parent Address" required>
+            </div>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="step-btn" id="backToStep1" title="Back">&#8592;</button>
+          <button type="button" class="step-btn" id="downloadPDF" title="Download PDF">&#128190;</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Bubble Chat Button -->
+  <div class="bubble-chat" id="bubbleChat" title="Chat with us on Facebook">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook Messenger" />
+    <span class="bubble-text">Chat with us!</span>
+  </div>
+  <div id="fbPageModal" class="fb-modal">
+    <div class="fb-modal-content">
+      <span class="fb-modal-close" id="fbModalClose">&times;</span>
+      <h3>Choose a Facebook Page to Enroll</h3>
+      <ul class="fb-page-list">
+        <li>
+          <button data-url="https://www.facebook.com/chpcebuinc">
+            Center for Healthcare Profession Cebu Inc.
+          </button>
+          <div class="fb-page-desc">This page is dedicated to inquiries regarding enrollment for Healthcare Services NC II, Caregiving NC II, and Housekeeping NC II.</div>
+        </li>
+        <li>
+          <button data-url="https://www.facebook.com/chp.mandaue">
+            CHP Mandaue
+          </button>
+          <div class="fb-page-desc">This page is dedicated to inquiries regarding enrollment, Request school documents & Payments</div>
+        </li>
+        <li>
+          <button data-url="https://www.facebook.com/profile.php?id=61557545647283">
+            CHP Cebu TESDA-Accredited
+          </button>
+          <div class="fb-page-desc">This page is dedicated to inquiries regarding for Assessment, Trainings</div>
+        </li>
+        <li>
+          <button data-url="https://www.facebook.com/chpcebuincshs">
+            CHPCebu Senior High
+          </button>
+          <div class="fb-page-desc">Senior High School department of CHP Cebu for SHS-related inquiries.</div>
+        </li>
+        <li>
+          <button data-url="https://www.facebook.com/profile.php?id=100048632096289">
+            Emergency Medical Services - EMT Course
+          </button>
+          <div class="fb-page-desc">For Emergency Medical Technician (EMT) course details and enrollment & Trainings.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Professional Footer -->
+  <footer class="footer">
+    <img src="/LOGO 1.jpg" alt="CHP Cebu Logo" class="footer-logo">
+    <div class="footer-title">Center for Healthcare Profession Cebu Inc.</div>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/chpcebuinc" target="_blank">Facebook</a>
+      <a href="mailto:info@chpcebu.com">Email</a>
+      <a href="tel:+63324121000">Contact</a>
+      <a href="https://goo.gl/maps/6w8kQwQwQwQwQwQw7" target="_blank">Location</a>
+    </div>
+    <div class="footer-contact">
+     FCB Building AC Cortes Ave., corner P. Burgos St., Alang-alang , Mandaue City, Philippines<br>
+      Tel: 09948962820 &nbsp;|&nbsp; Email: info@chpcebu.com
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/chpcebuinc" target="_blank" title="Facebook"><span>&#xf09a;</span></a>
+      <a href="mailto:info@chpcebu.com" title="Email"><span>&#xf0e0;</span></a>
+      <a href="tel:+63324121000" title="Call"><span>&#xf095;</span></a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2025 Center for Healthcare Profession Cebu Inc. | All Rights Reserved.
+    </div>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+      .footer-social span {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        font-size: 1.2em;
+        line-height: 32px;
+        display: inline-block;
+      }
+    </style>
+  </footer>
+  <!-- jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    // Multi-step navigation
+    document.getElementById('nextToStep2').onclick = function() {
+      // Validate all required fields in step1
+      const step1 = document.getElementById('step1');
+      let valid = true;
+      step1.querySelectorAll('input[required], select[required]').forEach(input => {
+        if (!input.value) valid = false;
+      });
+      if (!valid) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+      step1.style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+    document.getElementById('backToStep1').onclick = function() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    };
+
+    // PDF Download
+    document.getElementById('downloadPDF').onclick = function() {
+  const form = document.getElementById('multiStepForm');
+  const formData = new FormData(form);
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+  // --- CHP CEBU PAGE DESIGN ---
+  // Header
+  doc.setFillColor(56, 142, 60);
+  doc.rect(0, 0, 210, 22, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(18);
+  doc.text('CHP CEBU', 105, 12, { align: 'center' });
+  doc.setFontSize(11);
+  doc.text('TESDA Accredited Training & Assessment Center', 105, 18, { align: 'center' });
+
+  // Instructions
+  doc.setFontSize(10);
+  doc.setTextColor(56, 142, 60);
+  doc.text('INSTRUCTION: ', 10, 28);
+  doc.setTextColor(33,33,33);
+  doc.text('Please do NOT leave blanks. Write N/A when applicable.', 45, 28);
+
+  // --- A. Personal Record ---
+  let y = 34;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('A. Personal Record', 10, y);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(33,33,33);
+
+  // Row 1: Names
+  y += 7;
+  doc.text('Family Name: ' + (formData.get('Family Name') || ''), 12, y);
+  doc.text('First Name: ' + (formData.get('First Name') || ''), 70, y);
+  doc.text('Middle Name: ' + (formData.get('Middle Name') || ''), 120, y);
+  doc.text('Nickname: ' + (formData.get('Nickname') || ''), 170, y);
+
+  // Row 2: Age, DOB, Sex, etc.
+  y += 7;
+  doc.text('Age: ' + (formData.get('Age') || ''), 12, y);
+  doc.text('Date of Birth: ' + (formData.get('Date of Birth') || ''), 40, y);
+  doc.text('Sex: ' + (formData.get('Sex') || ''), 90, y);
+  doc.text('Marital Status: ' + (formData.get('Marital Status') || ''), 120, y);
+  doc.text('Citizenship: ' + (formData.get('Citizenship') || ''), 170, y);
+
+  // Row 3: Religion, Address
+  y += 7;
+  doc.text('Religion: ' + (formData.get('Religion') || ''), 12, y);
+  doc.text('Present Address: ' + (formData.get('Present Address') || ''), 60, y);
+  doc.text('Provincial Address: ' + (formData.get('Provincial Address') || ''), 130, y);
+
+  // Row 4: Contact, Email
+  y += 7;
+  doc.text('Contact/Mobile No.: ' + (formData.get('Contact Number') || ''), 12, y);
+  doc.text('Email Address: ' + (formData.get('Email Address') || ''), 80, y);
+
+  // Row 5: Occupation, Company, Telephone, Spouse, Children
+  y += 7;
+  doc.text('Occupation: ' + (formData.get('Occupation') || ''), 12, y);
+  doc.text('Company: ' + (formData.get('Company') || ''), 60, y);
+  doc.text('Telephone: ' + (formData.get('Telephone') || ''), 110, y);
+
+  y += 7;
+  doc.text('Name of Spouse: ' + (formData.get('Spouse Name') || ''), 12, y);
+  doc.text('No. of Children: ' + (formData.get('No. of Children') || ''), 80, y);
+
+  // --- B. Academic Record ---
+  y += 10;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('B. Academic Record', 10, y);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(33,33,33);
+
+  y += 7;
+  doc.text('Educational Attainment: ' + (formData.get('Educational Attainment') || ''), 12, y);
+  doc.text('Course/Degree/NCII: ' + (formData.get('Course Degree NCII') || ''), 80, y);
+  doc.text('School Graduated: ' + (formData.get('School Graduated') || ''), 12, y+7);
+  doc.text('Year Graduated: ' + (formData.get('Year Graduated') || ''), 80, y+7);
+
+  // --- C. Additional Information ---
+  y += 15;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('C. Additional Information', 10, y);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(33,33,33);
+
+  let yAdd = y+5;
+  function getAll(name) {
+    return formData.getAll(name + '[]').join(', ');
+  }
+  doc.text('Which program do you wish to pursue?', 12, yAdd);
+  doc.text(getAll('Program'), 80, yAdd);
+
+  yAdd += 6;
+  doc.text('How did you come to know about CHP Cebu?', 12, yAdd);
+  doc.text(getAll('Referral'), 80, yAdd);
+
+  yAdd += 6;
+  doc.text('How will you settle the fees/finances?', 12, yAdd);
+  doc.text(getAll('Finances'), 80, yAdd);
+
+  yAdd += 6;
+  doc.text('Terms of Payment:', 12, yAdd);
+  doc.text(getAll('Payment'), 80, yAdd);
+
+  yAdd += 10;
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(56, 142, 60);
+  doc.text('STATEMENT:', 12, yAdd);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(33,33,33);
+  doc.text('I certify that the statements made are true to the best of my knowledge and belief. I understand that any misstatement may lead to disqualification or to dismissal.', 12, yAdd+6, { maxWidth: 186 });
+
+  // Signature lines
+  doc.setDrawColor(56, 142, 60);
+  doc.line(20, 270, 80, 270);
+  doc.line(120, 270, 190, 270);
+  doc.text('RECEIVED BY:', 20, 274);
+  doc.text('Signature of Applicant:', 120, 274);
+  doc.text('Date:', 120, 282);
+  doc.line(130, 282, 170, 282);
+
+  // --- TESDA PAGE DESIGN (Styled like the real form) ---
+  doc.addPage();
+
+  // TESDA Header
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(0,0,0);
+  doc.text('Technical Education and Skills Development Authority', 105, 13, { align: 'center' });
+  doc.setFontSize(9);
+  doc.text('Pangasiwaan sa Edukasyong Teknikal at Pagpapaunlad ng Kasanayan', 105, 18, { align: 'center' });
+  doc.setFontSize(10);
+  doc.text('MIS 03 – 01', 180, 10);
+  doc.text('(rev. 2005)', 180, 14);
+
+  // Registration Form Title
+  doc.setFontSize(16);
+  doc.text('Registration Form', 105, 28, { align: 'center' });
+  doc.setFontSize(12);
+  doc.text('LEARNERS PROFILE FORM', 105, 36, { align: 'center' });
+
+  // ID Picture Box
+  doc.setDrawColor(0,0,0);
+  doc.rect(170, 24, 28, 28);
+  doc.setFontSize(8);
+  doc.text('I.D. Picture', 184, 39, { align: 'center' });
+
+  // Section 1: T2MIS Auto Generated
+  let yT = 44;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text('1. T2MIS Auto Generated', 12, yT);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  // 1.1 ULI
+  doc.text('1.1. Unique Learner Identifier (ULI):', 14, yT+7);
+  doc.text((formData.get('TESDA ULI') || ''), 80, yT+7);
+  // 1.2 Entry Date
+  doc.text('1.2. Entry Date:', 145, yT+7);
+  doc.text((formData.get('TESDA Entry Date') || ''), 170, yT+7);
+
+  // Section 2: Learner/Manpower Profile
+  yT += 14;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text('2. Learner/Manpower Profile', 12, yT);
+
+  // 2.1 Name
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  yT += 6;
+  doc.text('2.1. Name:', 14, yT);
+  doc.text('Last Name:', 32, yT);
+  doc.text((formData.get('Family Name') || ''), 52, yT);
+  doc.text('First Name:', 90, yT);
+  doc.text((formData.get('First Name') || ''), 112, yT);
+  doc.text('Middle Name:', 150, yT);
+  doc.text((formData.get('Middle Name') || ''), 172, yT);
+
+  // 2.2 Complete Mailing Address
+  yT += 7;
+  doc.text('2.2. Complete Mailing Address:', 14, yT);
+  doc.text((formData.get('TESDA Mailing Address') || ''), 70, yT);
+
+  // 2.3 Email, Contact, Nationality
+  yT += 7;
+  doc.text('Email Address/Facebook Account:', 14, yT);
+  doc.text((formData.get('TESDA Email') || ''), 70, yT);
+  doc.text('Contact No.:', 112, yT);
+  doc.text((formData.get('TESDA Contact') || ''), 132, yT);
+  doc.text('Nationality:', 164, yT);
+  doc.text((formData.get('TESDA Nationality') || ''), 182, yT);
+
+  // Section 3: Personal Information
+  yT += 9;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text('3. Personal Information', 12, yT);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+
+  // 3.1 Sex
+  yT += 6;
+  doc.text('3.1. Sex:', 14, yT);
+  doc.text((formData.get('TESDA Sex') || ''), 32, yT);
+
+  // 3.2 Civil Status
+  doc.text('3.2. Civil Status:', 52, yT);
+  doc.text((formData.get('TESDA Civil Status') || ''), 74, yT);
+
+  // 3.3 Employment Status
+  doc.text('3.3. Employment Status (before the training):', 102, yT);
+  doc.text((formData.get('TESDA Employment Status') || ''), 170, yT);
+
+  // 3.4 Birthdate
+  yT += 7;
+  doc.text('3.4. Birthdate', 14, yT);
+  doc.text('Month:', 36, yT);
+  doc.text((formData.get('TESDA Month of Birth') || ''), 48, yT);
+  doc.text('Day:', 65, yT);
+  doc.text((formData.get('TESDA Day of Birth') || ''), 74, yT);
+  doc.text('Year:', 88, yT);
+  doc.text((formData.get('TESDA Year of Birth') || ''), 98, yT);
+  doc.text('Age:', 116, yT);
+  doc.text((formData.get('TESDA Age') || ''), 124, yT);
+
+  // 3.5 Birthplace
+  yT += 7;
+  doc.text('3.5. Birthplace', 14, yT);
+  doc.text('City/Municipality:', 36, yT);
+  doc.text((formData.get('TESDA City') || ''), 68, yT);
+  doc.text('Province:', 104, yT);
+  doc.text((formData.get('TESDA Province') || ''), 120, yT);
+  doc.text('Region:', 156, yT);
+  doc.text((formData.get('TESDA Region') || ''), 170, yT);
+
+  // 3.6 Educational Attainment
+  yT += 7;
+  doc.text('3.6. Educational Attainment Before the Training (Trainee)', 14, yT);
+  doc.text((formData.get('TESDA Highest Education') || ''), 120, yT);
+
+  // 3.7 Parent/Guardian
+  yT += 7;
+  doc.text('3.7. Parent/Guardian', 14, yT);
+  doc.text('Name:', 44, yT);
+  doc.text((formData.get('TESDA Parent Name') || ''), 56, yT);
+  doc.text('Complete Permanent Mailing Address:', 100, yT);
+  doc.text((formData.get('TESDA Parent Address') || ''), 150, yT);
+
+  doc.save('CHP_TESDA_Enrollment_Form.pdf');
+    };
+
+    // Prevent default form submit
+    document.getElementById('multiStepForm').onsubmit = function(e) {
+      e.preventDefault();
+    };
+
+    // Bubble chat click event (show modal)
+    document.getElementById('bubbleChat').onclick = function() {
+      document.getElementById('fbPageModal').style.display = 'flex';
+    };
+    // Close modal
+    document.getElementById('fbModalClose').onclick = function() {
+      document.getElementById('fbPageModal').style.display = 'none';
+    };
+    // Close modal when clicking outside the modal content
+    document.getElementById('fbPageModal').onclick = function(e) {
+      if (e.target === this) this.style.display = 'none';
+    };
+    // Redirect to selected Facebook page
+    document.querySelectorAll('.fb-page-list button').forEach(btn => {
+      btn.onclick = function() {
+        window.open(this.getAttribute('data-url'), '_blank');
+        document.getElementById('fbPageModal').style.display = 'none';
+      };
+    });
+  </script>
+</body>
+</html>
