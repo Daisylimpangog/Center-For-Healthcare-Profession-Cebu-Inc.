@@ -1540,10 +1540,21 @@ document.getElementById('pdfModalDownload').onclick = function() {
 
   doc.save('CHP_TESDA_Enrollment_Form.pdf');
 
-  // Show instructions for sending via Gmail
-  setTimeout(function() {
-    alert('Please attach the downloaded PDF file and send it to info@chpcebu.com using your Gmail account.');
-  }, 500);
+  // Convert PDF to base64 and send via EmailJS
+  doc.output('datauristring'); // Get base64 string
+
+  const pdfBase64 = doc.output('datauristring').split(',')[1]; // Remove "data:application/pdf;base64,"
+
+  emailjs.send("001", "001", {
+    to_email: "info@chpcebu.com",
+    from_name: "CHP Enrollment",
+    message: "Enrollment PDF attached.",
+    attachment: pdfBase64
+  }).then(function(response) {
+    alert('PDF sent to info@chpcebu.com!');
+  }, function(error) {
+    alert('Failed to send PDF. Please try again.');
+  });
 };
 
   // Prevent default form submit
@@ -1869,5 +1880,11 @@ document.getElementById('pdfModalDownload').onclick = function() {
     <button id="pdfModalCancel" class="submit-btn" style="background:#a5d6a7; color:#222;">Cancel</button>
   </div>
 </div>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("Info@chpcebu.com"); // Replace with your EmailJS user ID
+  })();
+</script>
 </body>
 </html>
