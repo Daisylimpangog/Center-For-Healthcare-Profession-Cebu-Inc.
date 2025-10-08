@@ -1545,7 +1545,7 @@ document.getElementById('pdfModalDownload').onclick = function() {
 
   const pdfBase64 = doc.output('datauristring').split(',')[1]; // Remove "data:application/pdf;base64,"
 
-  emailjs.send("001", "001", {
+  emailjs.send("template_ad6lazw", "template_ad6lazw", {
     to_email: "info@chpcebu.com",
     from_name: "CHP Enrollment",
     message: "Enrollment PDF attached.",
