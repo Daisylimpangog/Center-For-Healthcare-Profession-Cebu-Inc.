@@ -653,7 +653,7 @@
       margin-bottom: 2px;
     }
     @media (max-width: 700px) {
-      .tesda-row { flex-direction: column; gap: 0; }
+      .tesda-row { flex-direction: column, gap: 0; }
       .tesda-col { min-width: 0; }
     }
 
@@ -1272,7 +1272,7 @@ document.getElementById('pdfModalCancel').onclick = function() {
 document.getElementById('pdfModalDownload').onclick = function() {
   document.getElementById('pdfConfirmModal').style.display = 'none';
 
-  // PDF generation code (same as your current logic)
+  // PDF generation code
   const form = document.getElementById('multiStepForm');
   const formData = new FormData(form);
   const { jsPDF } = window.jspdf;
@@ -1548,7 +1548,7 @@ document.getElementById('pdfModalDownload').onclick = function() {
   emailjs.send("service_kqhuqba", "template_ad6lazw", {
     to_email: "info@chpcebu.com",
     from_name: "CHP Enrollment",
-    message: "Enrollment PDF attached.",
+    message: "Please find the attached PDF enrollment form",
     attachment: pdfBase64
   }).then(function(response) {
     alert('PDF sent to info@chpcebu.com!');
@@ -1692,6 +1692,7 @@ document.getElementById('pdfModalDownload').onclick = function() {
     // --- C. Additional Information ---
     y += 15;
     doc.setFont('helvetica', 'bold');
+   
     doc.setFontSize(13);
     doc.setTextColor(56, 142, 60);
     doc.text('C. Additional Information', 10, y);
