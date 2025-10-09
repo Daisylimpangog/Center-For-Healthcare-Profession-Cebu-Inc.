@@ -1327,6 +1327,7 @@ document.getElementById('previewPDF').onclick = function() {
 };
 
 // EmailJS send logic for the form (attach PDF)
+// Make sure your EmailJS template uses these variable names: name, message, email, attachment
 const btn = document.getElementById("button");
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -1358,10 +1359,8 @@ document.getElementById("form").addEventListener("submit", function (event) {
   // Get PDF base64
   const pdfBase64 = doc.output('datauristring').split(',')[1];
 
-  const serviceID = "service_kqhuqba";
-  const templateID = "template_ad6lazw";
-
-  emailjs.send(serviceID, templateID, {
+  // Use the correct template and service IDs and variable names
+  emailjs.send("service_kqhuqba", "template_ad6lazw", {
     name: modalData.get('name'),
     message: modalData.get('message'),
     email: modalData.get('email'),
