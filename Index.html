@@ -864,7 +864,7 @@ Cebu 6014 Philippines.</span>
     <div class="instructions">
       <b>INSTRUCTION:</b> Please do NOT leave blanks. Write N/A when applicable.
     </div>
-    <form id="multiStepForm" autocomplete="off">
+    <form id="multiStepForm" action="https://formspree.io/f/movknzjk" method="POST" autocomplete="off">
       <!-- STEP 1: CHP Enrollment Form -->
       <div id="step1" class="form-step active">
         <h2 class="section-title">A. Personal Record</h2>
@@ -1027,6 +1027,14 @@ Cebu 6014 Philippines.</span>
             <label><input type="checkbox" name="Finances[]" value="Employer"> Employer</label>
           </div>
         </div>
+         <div class="section">
+          <label>Select Schedules</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="Finances[]" value="Self">Day</label>
+            <label><input type="checkbox" name="Finances[]" value="Relatives">Night</label>
+            <label><input type="checkbox" name="Finances[]" value="Employer">Weekend</label>
+          </div>
+        </div>
         <div class="section">
           <label>Terms of Payment:</label>
           <div class="checkbox-group">
@@ -1148,6 +1156,7 @@ Cebu 6014 Philippines.</span>
               <input type="text" name="TESDA Region" required>
             </div>
           </div>
+          
           <div class="tesda-row">
             <div class="tesda-col">
               <label class="tesda-label">Highest Educational Attainment</label>
@@ -1162,6 +1171,17 @@ Cebu 6014 Philippines.</span>
                 <option>Junior High Graduate</option>
                 <option>Senior High Graduate</option>
                 <option>Others</option>
+              </select>
+            </div>
+          </div>
+          <div class="tesda-row">
+            <div class="tesda-col">
+              <label class="tesda-label">Select Schedule</label>
+              <select name="TESDA Highest Education" required>
+                <option value="">Select</option>
+                <option>DAY</option>
+                <option>NIGHT</option>
+                <option>WEEKEND</option>
               </select>
             </div>
           </div>
@@ -1266,7 +1286,6 @@ Cebu 6014 Philippines.</span>
   <script>
   // Multi-step navigation
   document.getElementById('nextToStep2').onclick = function() {
-    // Validate all required fields in step1
     const step1 = document.getElementById('step1');
     let valid = true;
     step1.querySelectorAll('input[required], select[required]').forEach(input => {
@@ -1286,125 +1305,140 @@ Cebu 6014 Philippines.</span>
     window.scrollTo({top: 0, behavior: 'smooth'});
   };
 
-  // Show modal when clicking "Submit" (was Download PDF)
-document.getElementById('downloadPDF').textContent = "Submit";
-document.getElementById('downloadPDF').onclick = function(e) {
-  document.getElementById('emailFormModal').style.display = 'flex';
-};
-
-// Close modal
-document.getElementById('emailFormModalClose').onclick = function() {
-  document.getElementById('emailFormModal').style.display = 'none';
-};
-
-// PDF Preview
-document.getElementById('previewPDF').onclick = function() {
+  // PDF Download Button (add this button in STEP 2 nav)
+document.getElementById('downloadPDF').onclick = function() {
   const mainForm = document.getElementById('multiStepForm');
-  const modalForm = document.getElementById('form');
   const mainData = new FormData(mainForm);
-  const modalData = new FormData(modalForm);
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  doc.setFontSize(14);
-  doc.text('Enrollment Submission', 105, 18, { align: 'center' });
-  doc.setFontSize(11);
-  doc.text('Fullname: ' + (modalData.get('name') || ''), 20, 32);
-  doc.text('Course: ' + (modalData.get('message') || ''), 20, 40);
-  doc.text('Email: ' + (modalData.get('email') || ''), 20, 48);
-
+  // HEADER
+  doc.setFillColor(34, 128, 9);
+  doc.rect(0, 0, 210, 22, 'F');
+  doc.setFontSize(18);
+  doc.setTextColor(255, 255, 255);
+  doc.text('Center for Healthcare Professions Cebu, Inc.', 105, 13, { align: 'center' });
   doc.setFontSize(12);
-  doc.text('Family Name: ' + (mainData.get('Family Name') || ''), 20, 60);
-  doc.text('First Name: ' + (mainData.get('First Name') || ''), 20, 68);
-  doc.text('Middle Name: ' + (mainData.get('Middle Name') || ''), 20, 76);
-  doc.text('Course/Degree: ' + (mainData.get('Course Degree NCII') || ''), 20, 84);
+  doc.text('TESDA Accredited Training & Assessment Center', 105, 20, { align: 'center' });
 
-  // Show PDF in iframe
-  const pdfFrame = document.getElementById('pdfPreviewFrame');
-  pdfFrame.style.display = 'block';
-  pdfFrame.src = doc.output('datauristring');
+  // School logo (optional, if you have base64 or URL)
+  // doc.addImage('data:image/jpeg;base64,...', 'JPEG', 12, 4, 18, 18);
+
+  // Divider
+  doc.setDrawColor(56, 142, 60);
+  doc.setLineWidth(0.7);
+  doc.line(20, 26, 190, 26);
+
+  // SECTION: Personal Record
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('A. Personal Record', 20, 32);
+
+  doc.setFontSize(10);
+  doc.setTextColor(40, 40, 40);
+  let y = 38;
+  doc.text('Family Name:', 20, y); doc.text((mainData.get('Family Name') || ''), 60, y); y += 7;
+  doc.text('First Name:', 20, y); doc.text((mainData.get('First Name') || ''), 60, y); y += 7;
+  doc.text('Middle Name:', 20, y); doc.text((mainData.get('Middle Name') || ''), 60, y); y += 7;
+  doc.text('Nickname:', 20, y); doc.text((mainData.get('Nickname') || ''), 60, y); y += 7;
+  doc.text('Age:', 20, y); doc.text((mainData.get('Age') || ''), 60, y); y += 7;
+  doc.text('Date of Birth:', 20, y); doc.text((mainData.get('Date of Birth') || ''), 60, y); y += 7;
+  doc.text('Place of Birth:', 20, y); doc.text((mainData.get('Place of Birth') || ''), 60, y); y += 7;
+  doc.text('Sex:', 20, y); doc.text((mainData.get('Sex') || ''), 60, y); y += 7;
+  doc.text('Marital Status:', 20, y); doc.text((mainData.get('Marital Status') || ''), 60, y); y += 7;
+  doc.text('Citizenship:', 20, y); doc.text((mainData.get('Citizenship') || ''), 60, y); y += 7;
+  doc.text('Religion:', 20, y); doc.text((mainData.get('Religion') || ''), 60, y); y += 7;
+  doc.text('Present Address:', 20, y); doc.text((mainData.get('Present Address') || ''), 60, y); y += 7;
+  doc.text('Provincial Address:', 20, y); doc.text((mainData.get('Provincial Address') || ''), 60, y); y += 7;
+  doc.text('Contact Number:', 20, y); doc.text((mainData.get('Contact Number') || ''), 60, y); y += 7;
+  doc.text('Email Address:', 20, y); doc.text((mainData.get('Email Address') || ''), 60, y); y += 7;
+  doc.text('Occupation:', 20, y); doc.text((mainData.get('Occupation') || ''), 60, y); y += 7;
+  doc.text('Company:', 20, y); doc.text((mainData.get('Company') || ''), 60, y); y += 7;
+  doc.text('Telephone:', 20, y); doc.text((mainData.get('Telephone') || ''), 60, y); y += 7;
+  doc.text('Spouse Name:', 20, y); doc.text((mainData.get('Spouse Name') || ''), 60, y); y += 7;
+  doc.text('No. of Children:', 20, y); doc.text((mainData.get('No. of Children') || ''), 60, y); y += 7;
+
+  // Academic Record
+  y += 4;
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('B. Academic Record', 20, y); y += 6;
+  doc.setFontSize(10);
+  doc.setTextColor(40, 40, 40);
+  doc.text('Educational Attainment:', 20, y); doc.text((mainData.get('Educational Attainment') || ''), 60, y); y += 7;
+  doc.text('Course Degree NCII:', 20, y); doc.text((mainData.get('Course Degree NCII') || ''), 60, y); y += 7;
+  doc.text('School Graduated:', 20, y); doc.text((mainData.get('School Graduated') || ''), 60, y); y += 7;
+  doc.text('Year Graduated:', 20, y); doc.text((mainData.get('Year Graduated') || ''), 60, y); y += 7;
+
+  // Additional Information
+  y += 4;
+  doc.setFontSize(13);
+  doc.setTextColor(56, 142, 60);
+  doc.text('C. Additional Information', 20, y); y += 6;
+  doc.setFontSize(10);
+  doc.setTextColor(40, 40, 40);
+  doc.text('Program:', 20, y); doc.text((mainData.getAll('Program[]').join(', ') || ''), 60, y); y += 7;
+  doc.text('Referral:', 20, y); doc.text((mainData.getAll('Referral[]').join(', ') || ''), 60, y); y += 7;
+  doc.text('Finances:', 20, y); doc.text((mainData.getAll('Finances[]').join(', ') || ''), 60, y); y += 7;
+  doc.text('Payment:', 20, y); doc.text((mainData.getAll('Payment[]').join(', ') || ''), 60, y); y += 7;
+
+  // Statement
+  y += 10;
+  doc.setFontSize(10);
+  doc.setTextColor(120, 120, 120);
+  doc.text('I certify that the statements made are true to the best of my knowledge and belief.', 20, y); y += 7;
+  doc.text('I understand that any misstatement may lead to disqualification or to dismissal.', 20, y); y += 7;
+
+  // Signature lines
+  y += 12;
+  doc.setDrawColor(56, 142, 60);
+  doc.line(20, y, 80, y);
+  doc.text('Signature of Applicant', 20, y + 5);
+  doc.line(120, y, 180, y);
+  doc.text('Date', 120, y + 5);
+
+  // TESDA Learner's Profile Form (new page)
+  doc.addPage();
+  let y2 = 22;
+  doc.setFillColor(56, 142, 60);
+  doc.rect(0, 0, 210, 22, 'F');
+  doc.setFontSize(15);
+  doc.setTextColor(255, 255, 255);
+  doc.text('TESDA Learner\'s Profile Form', 105, 14, { align: 'center' });
+
+  doc.setFontSize(10);
+  doc.setTextColor(40, 40, 40);
+  y2 = 28;
+  doc.text('TESDA ULI:', 20, y2); doc.text((mainData.get('TESDA ULI') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Entry Date:', 20, y2); doc.text((mainData.get('TESDA Entry Date') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Mailing Address:', 20, y2); doc.text((mainData.get('TESDA Mailing Address') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Email:', 20, y2); doc.text((mainData.get('TESDA Email') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Contact:', 20, y2); doc.text((mainData.get('TESDA Contact') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Nationality:', 20, y2); doc.text((mainData.get('TESDA Nationality') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Sex:', 20, y2); doc.text((mainData.get('TESDA Sex') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Civil Status:', 20, y2); doc.text((mainData.get('TESDA Civil Status') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Employment Status:', 20, y2); doc.text((mainData.get('TESDA Employment Status') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Month of Birth:', 20, y2); doc.text((mainData.get('TESDA Month of Birth') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Day of Birth:', 20, y2); doc.text((mainData.get('TESDA Day of Birth') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Year of Birth:', 20, y2); doc.text((mainData.get('TESDA Year of Birth') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Age:', 20, y2); doc.text((mainData.get('TESDA Age') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA City:', 20, y2); doc.text((mainData.get('TESDA City') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Province:', 20, y2); doc.text((mainData.get('TESDA Province') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Region:', 20, y2); doc.text((mainData.get('TESDA Region') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Highest Education:', 20, y2); doc.text((mainData.get('TESDA Highest Education') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Parent Name:', 20, y2); doc.text((mainData.get('TESDA Parent Name') || ''), 70, y2); y2 += 7;
+  doc.text('TESDA Parent Address:', 20, y2); doc.text((mainData.get('TESDA Parent Address') || ''), 70, y2); y2 += 7;
+
+  // Footer
+  doc.setFontSize(9);
+  doc.setTextColor(120, 120, 120);
+  doc.text('Generated by CHP Cebu Online Enrollment', 105, 285, { align: 'center' });
+
+  doc.save('CHP_Enrollment_Form.pdf');
 };
-
-// EmailJS send logic for the form (attach PDF)
-// Make sure your EmailJS template uses these variable names: name, message, email, attachment
-const btn = document.getElementById("button");
-document.getElementById("form").addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  btn.value = "Sending...";
-
-  // Generate PDF and get base64
-  const mainForm = document.getElementById('multiStepForm');
-  const modalForm = document.getElementById('form');
-  const mainData = new FormData(mainForm);
-  const modalData = new FormData(modalForm);
-
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
-  doc.setFontSize(14);
-  doc.text('Enrollment Submission', 105, 18, { align: 'center' });
-  doc.setFontSize(11);
-  doc.text('Fullname: ' + (modalData.get('name') || ''), 20, 32);
-  doc.text('Course: ' + (modalData.get('message') || ''), 20, 40);
-  doc.text('Email: ' + (modalData.get('email') || ''), 20, 48);
-
-  doc.setFontSize(12);
-  doc.text('Family Name: ' + (mainData.get('Family Name') || ''), 20, 60);
-  doc.text('First Name: ' + (mainData.get('First Name') || ''), 20, 68);
-  doc.text('Middle Name: ' + (mainData.get('Middle Name') || ''), 20, 76);
-  doc.text('Course/Degree: ' + (mainData.get('Course Degree NCII') || ''), 20, 84);
-
-  // Get PDF base64
-  const pdfBase64 = doc.output('datauristring').split(',')[1];
-
-  // Use the correct template and service IDs and variable names
-  emailjs.send("service_kqhuqba", "template_es1zooi", {
-    name: modalData.get('name'),
-    message: modalData.get('message'),
-    email: modalData.get('email'),
-    attachment: pdfBase64
-  }).then(
-    () => {
-      btn.value = "Send Email";
-      alert("Sent!");
-      document.getElementById('emailFormModal').style.display = 'none';
-    },
-    (err) => {
-      btn.value = "Send Email";
-      alert(JSON.stringify(err));
-    },
-  );
-});
   </script>
-  <!-- Add this modal just before the closing </body> tag -->
-  <!-- Modal for PDF preview and sending -->
-<div id="emailFormModal" style="display:none; position:fixed; z-index:10002; left:0; top:0; width:100vw; height:100vh; background:rgba(56,142,60,0.18); align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:12px; padding:32px 28px 24px 28px; max-width:350px; width:92vw; margin:auto; box-shadow:0 8px 32px rgba(56,142,60,0.18); text-align:center; position:relative;">
-    <span id="emailFormModalClose" style="position:absolute; right:18px; top:10px; font-size:1.5em; color:#388e3c; cursor:pointer; font-weight:bold;">&times;</span>
-    <h3 style="color:#388e3c; font-size:1.13em; font-weight:700; margin-bottom:18px;">Submit Your Information</h3>
-    <form id="form">
-      <div class="field">
-        <label for="name">Fullname</label>
-        <input type="text" name="name" id="name" required>
-      </div>
-      <div class="field">
-        <label for="message">Course:</label>
-        <input type="text" name="message" id="message" required>
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
-      </div>
-      <div class="field" style="margin-top:18px;">
-        <button type="button" id="previewPDF" style="background:#388e3c; color:#fff; border:none; padding:10px 0; border-radius:8px; width:100%; font-weight:700; font-size:1em; margin-bottom:8px;">Preview PDF</button>
-      </div>
-      <iframe id="pdfPreviewFrame" style="display:none; width:100%; height:320px; border:1px solid #a5d6a7; border-radius:8px; margin-bottom:12px;"></iframe>
-      <input type="submit" id="button" value="Send Email">
-    </form>
-  </div>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){
