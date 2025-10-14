@@ -1445,5 +1445,22 @@ document.getElementById('downloadPDF').onclick = function() {
   emailjs.init("5z-bJnXK7JoSfUQCx"); // Replace with your actual EmailJS user ID
 })();
 </script>
+<script>
+document.getElementById('bubbleChat').onclick = function() {
+  document.getElementById('fbPageModal').style.display = 'flex';
+};
+
+document.getElementById('fbModalClose').onclick = function() {
+  document.getElementById('fbPageModal').style.display = 'none';
+};
+
+// Optional: Make each Facebook page button open its link
+document.querySelectorAll('.fb-page-list button').forEach(function(btn) {
+  btn.onclick = function() {
+    window.open(btn.getAttribute('data-url'), '_blank');
+    document.getElementById('fbPageModal').style.display = 'none';
+  };
+});
+</script>
 </body>
 </html>
